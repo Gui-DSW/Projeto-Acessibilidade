@@ -49,6 +49,11 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
         
+        .accessibility-btn:focus {
+            outline: 3px solid #ffcc00;
+            outline-offset: 3px;
+        }
+        
         .accessibility-panel {
             position: fixed;
             top: 80px;
@@ -77,8 +82,10 @@
             transition: background 0.3s ease;
         }
         
-        .accessibility-panel button:hover {
+        .accessibility-panel button:hover, 
+        .accessibility-panel button:focus {
             background: #0055dd;
+            outline: 2px solid #ffcc00;
         }
         
         .accessibility-btn:hover + .accessibility-panel,
@@ -132,10 +139,12 @@
             transition: all 0.3s ease;
         }
         
-        .nav-links a:hover {
+        .nav-links a:hover, 
+        .nav-links a:focus {
             background-color: #ff0022;
             color: #000;
             transform: translateY(-5px);
+            outline: none;
         }
         
         /* Hero Section */
@@ -197,7 +206,8 @@
             box-shadow: 0 5px 15px rgba(0, 102, 255, 0.3);
         }
         
-        .card:hover {
+        .card:hover, 
+        .card:focus-within {
             transform: translateY(-10px);
             border-color: #ffcc00;
         }
@@ -251,7 +261,8 @@
             transition: transform 0.3s ease;
         }
         
-        .album:hover {
+        .album:hover, 
+        .album:focus-within {
             transform: scale(1.05);
         }
         
@@ -263,7 +274,8 @@
             box-shadow: 0 5px 15px rgba(255, 0, 34, 0.5);
         }
         
-        .album:hover .album-cover {
+        .album:hover .album-cover,
+        .album:focus .album-cover {
             border-color: #0066ff;
         }
         
@@ -300,9 +312,12 @@
             transition: all 0.3s ease;
         }
         
-        .social-links a:hover {
+        .social-links a:hover, 
+        .social-links a:focus {
             color: #ff0022;
             transform: translateY(-5px);
+            outline: 2px solid #ffcc00;
+            outline-offset: 2px;
         }
         
         /* Efeitos psicodélicos */
@@ -346,6 +361,30 @@
         
         body.font-xlarge {
             font-size: 24px;
+        }
+        
+        /* Indicador de foco para navegação por teclado */
+        .keyboard-nav *:focus {
+            outline: 2px solid #ffcc00 !important;
+            outline-offset: 2px;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+        }
+        
+        /* Pular navegação - para usuários de leitores de tela */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #ff0022;
+            color: white;
+            padding: 8px;
+            z-index: 10000;
+            transition: top 0.3s;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+            outline: 2px solid #ffcc00;
         }
         
         /* Responsividade */
@@ -403,26 +442,28 @@
         }
     </style>
 </head>
-<body>
+<body class="keyboard-nav">
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+    
     <div id="particles-js"></div>
     
     <!-- Botão de Acessibilidade -->
-    <button class="accessibility-btn" aria-label="Opções de acessibilidade">A</button>
+    <button class="accessibility-btn" aria-label="Opções de acessibilidade" tabindex="0">A</button>
     <div class="accessibility-panel">
-        <button onclick="changeFontSize('normal')">Texto Normal</button>
-        <button onclick="changeFontSize('large')">Texto Grande</button>
-        <button onclick="changeFontSize('xlarge')">Texto Extra Grande</button>
+        <button onclick="changeFontSize('normal')" tabindex="0">Texto Normal</button>
+        <button onclick="changeFontSize('large')" tabindex="0">Texto Grande</button>
+        <button onclick="changeFontSize('xlarge')" tabindex="0">Texto Extra Grande</button>
     </div>
     
-    <div class="container">
+    <div class="container" id="main-content">
         <header>
             <div class="logo">SYSTEM OF A DOWN</div>
             <div class="subtitle">Música que desafia convenções desde 1994</div>
             <div class="nav-links">
-                <a href="#historia">História</a>
-                <a href="#discografia">Discografia</a>
-                <a href="#membros">Membros</a>
-                <a href="#tour">Tour</a>
+                <a href="#historia" tabindex="0">História</a>
+                <a href="#discografia" tabindex="0">Discografia</a>
+                <a href="#membros" tabindex="0">Membros</a>
+                <a href="#tour" tabindex="0">Tour</a>
             </div>
         </header>
         
@@ -437,7 +478,7 @@
         <div class="psychedelic-box"></div>
         
         <section class="content-section" id="historia">
-            <div class="card">
+            <div class="card" tabindex="0">
                 <img src="https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Formação" class="card-image">
                 <div class="card-content">
                     <h3>Origem</h3>
@@ -445,7 +486,7 @@
                 </div>
             </div>
             
-            <div class="card">
+            <div class="card" tabindex="0">
                 <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Shows" class="card-image">
                 <div class="card-content">
                     <h3>Sucesso</h3>
@@ -453,7 +494,7 @@
                 </div>
             </div>
             
-            <div class="card">
+            <div class="card" tabindex="0">
                 <img src="https://images.unsplash.com/photo-1587059328160-257f3151181e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ativismo" class="card-image">
                 <div class="card-content">
                     <h3>Ativismo</h3>
@@ -465,27 +506,27 @@
         <section class="discography" id="discografia">
             <h2>Discografia</h2>
             <div class="albums">
-                <div class="album">
+                <div class="album" tabindex="0">
                     <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="System of a Down" class="album-cover">
                     <div class="album-title">System of a Down <span class="album-year">(1998)</span></div>
                 </div>
                 
-                <div class="album">
+                <div class="album" tabindex="0">
                     <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Toxicity" class="album-cover">
                     <div class="album-title">Toxicity <span class="album-year">(2001)</span></div>
                 </div>
                 
-                <div class="album">
+                <div class="album" tabindex="0">
                     <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Steal This Album!" class="album-cover">
                     <div class="album-title">Steal This Album! <span class="album-year">(2002)</span></div>
                 </div>
                 
-                <div class="album">
+                <div class="album" tabindex="0">
                     <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mezmerize" class="album-cover">
                     <div class="album-title">Mezmerize <span class="album-year">(2005)</span></div>
                 </div>
                 
-                <div class="album">
+                <div class="album" tabindex="0">
                     <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hypnotize" class="album-cover">
                     <div class="album-title">Hypnotize <span class="album-year">(2005)</span></div>
                 </div>
@@ -494,10 +535,10 @@
         
         <footer>
             <div class="social-links">
-                <a href="#">📱</a>
-                <a href="#">💻</a>
-                <a href="#">📷</a>
-                <a href="#">🎵</a>
+                <a href="#" tabindex="0">📱</a>
+                <a href="#" tabindex="0">💻</a>
+                <a href="#" tabindex="0">📷</a>
+                <a href="#" tabindex="0">🎵</a>
             </div>
             <p>© 2023 System of a Down | Site não oficial para fins educacionais</p>
         </footer>
@@ -586,6 +627,9 @@
                 },
                 retina_detect: true
             });
+            
+            // Adicionar gerenciamento de foco para acessibilidade
+            initAccessibility();
         });
         
         // Funções de acessibilidade
@@ -608,6 +652,35 @@
         document.querySelector('.accessibility-panel').addEventListener('mouseleave', function() {
             this.style.display = 'none';
         });
+        
+        // Inicializar recursos de acessibilidade
+        function initAccessibility() {
+            // Adicionar todos os elementos interativos à ordem de tabulação
+            const interactiveElements = document.querySelectorAll('a, button, input, select, textarea, [tabindex]');
+            interactiveElements.forEach(el => {
+                if (!el.hasAttribute('tabindex')) {
+                    el.setAttribute('tabindex', '0');
+                }
+            });
+            
+            // Melhorar a navegação por teclado
+            document.addEventListener('keydown', function(e) {
+                // Tecla Tab - navegação normal
+                if (e.key === 'Tab') {
+                    document.body.classList.add('keyboard-nav');
+                }
+                
+                // Tecla Escape - fechar painéis
+                if (e.key === 'Escape') {
+                    document.querySelector('.accessibility-panel').style.display = 'none';
+                }
+            });
+            
+            // Remover a classe quando o mouse é usado
+            document.addEventListener('mousedown', function() {
+                document.body.classList.remove('keyboard-nav');
+            });
+        }
     </script>
     
     <!-- Biblioteca de partículas -->
