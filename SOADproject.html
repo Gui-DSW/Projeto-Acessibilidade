@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System of a Down - Experiência Tropicália</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&family=Press+Start+2P&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Chakra Petch', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+            font-size: 16px; /* Tamanho base */
+            transition: font-size 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Botão de Acessibilidade */
+        .accessibility-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #ff0022;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .accessibility-panel {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid #ffcc00;
+            border-radius: 10px;
+            padding: 15px;
+            z-index: 999;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            transform-origin: top right;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        
+        .accessibility-panel button {
+            background: #0066ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .accessibility-panel button:hover {
+            background: #0055dd;
+        }
+        
+        .accessibility-btn:hover + .accessibility-panel,
+        .accessibility-panel:hover {
+            display: flex;
+            transform: scale(1);
+        }
+        
+        /* Header e Navegação */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 4rem;
+            font-weight: 700;
+            color: #ff0022;
+            text-shadow: 3px 3px 0 #ffcc00, 
+                         -3px -3px 0 #0066ff;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            animation: glitch 5s infinite;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #ffcc00;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border: 2px solid #ff0022;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background-color: #ff0022;
+            color: #000;
+            transform: translateY(-5px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            margin: 40px 0;
+            border: 5px solid #ffcc00;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            filter: saturate(150%);
+        }
+        
+        .hero-text {
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+            max-width: 600px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        
+        .hero-text h2 {
+            font-size: 3rem;
+            color: #ffcc00;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0 #ff0022;
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .card {
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #0066ff;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.3);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #ffcc00;
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            filter: grayscale(30%);
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card h3 {
+            color: #ff0022;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ffcc00;
+            padding-bottom: 10px;
+        }
+        
+        .card p {
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        /* Discografia */
+        .discography {
+            margin: 60px 0;
+        }
+        
+        .discography h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #ffcc00;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0 #ff0022;
+        }
+        
+        .albums {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .album {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .album:hover {
+            transform: scale(1.05);
+        }
+        
+        .album-cover {
+            width: 100%;
+            border-radius: 10px;
+            border: 3px solid #ff0022;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 0, 34, 0.5);
+        }
+        
+        .album:hover .album-cover {
+            border-color: #0066ff;
+        }
+        
+        .album-title {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        
+        .album-year {
+            color: #999;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 2px solid #ff0022;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: #ffcc00;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #ff0022;
+            transform: translateY(-5px);
+        }
+        
+        /* Efeitos psicodélicos */
+        .psychedelic-box {
+            height: 100px;
+            margin: 40px 0;
+            background: linear-gradient(90deg, 
+                #ff0022 0%, 
+                #0066ff 25%, 
+                #ffcc00 50%, 
+                #00ff66 75%, 
+                #ff0022 100%);
+            background-size: 200% auto;
+            animation: psychedelic 5s infinite linear;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 0, 34, 0.7);
+        }
+        
+        @keyframes psychedelic {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        @keyframes glitch {
+            0% { text-shadow: 3px 3px 0 #ffcc00, -3px -3px 0 #0066ff; }
+            5% { text-shadow: -3px 3px 0 #ffcc00, 3px -3px 0 #0066ff; }
+            10% { text-shadow: 3px -3px 0 #ffcc00, -3px 3px 0 #0066ff; }
+            15% { text-shadow: -3px -3px 0 #ffcc00, 3px 3px 0 #0066ff; }
+            20% { text-shadow: 3px 3px 0 #ffcc00, -3px -3px 0 #0066ff; }
+            100% { text-shadow: 3px 3px 0 #ffcc00, -3px -3px 0 #0066ff; }
+        }
+        
+        /* Tamanhos de fonte para acessibilidade */
+        body.font-small {
+            font-size: 14px;
+        }
+        
+        body.font-large {
+            font-size: 20px;
+        }
+        
+        body.font-xlarge {
+            font-size: 24px;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .hero {
+                height: 400px;
+            }
+            
+            .hero-text {
+                left: 20px;
+                bottom: 20px;
+                max-width: 90%;
+            }
+            
+            .hero-text h2 {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .accessibility-btn {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .accessibility-panel {
+                top: 60px;
+                right: 10px;
+            }
+        }
+        
+        /* Efeito de partículas */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <!-- Botão de Acessibilidade -->
+    <button class="accessibility-btn" aria-label="Opções de acessibilidade">A</button>
+    <div class="accessibility-panel">
+        <button onclick="changeFontSize('normal')">Texto Normal</button>
+        <button onclick="changeFontSize('large')">Texto Grande</button>
+        <button onclick="changeFontSize('xlarge')">Texto Extra Grande</button>
+    </div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">SYSTEM OF A DOWN</div>
+            <div class="subtitle">Música que desafia convenções desde 1994</div>
+            <div class="nav-links">
+                <a href="#historia">História</a>
+                <a href="#discografia">Discografia</a>
+                <a href="#membros">Membros</a>
+                <a href="#tour">Tour</a>
+            </div>
+        </header>
+        
+        <section class="hero">
+            <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80" alt="System of a Down" class="hero-image">
+            <div class="hero-text">
+                <h2>Caos Controlado</h2>
+                <p>Uma jornada através da música poderosa e das letras provocativas do System of a Down, uma das bandas mais únicas e influentes do metal alternativo.</p>
+            </div>
+        </section>
+        
+        <div class="psychedelic-box"></div>
+        
+        <section class="content-section" id="historia">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Formação" class="card-image">
+                <div class="card-content">
+                    <h3>Origem</h3>
+                    <p>System of a Down formou-se em Los Angeles em 1994, trazendo uma fusão única de metal, rock alternativo e elementos da música tradicional armênia.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Shows" class="card-image">
+                <div class="card-content">
+                    <h3>Sucesso</h3>
+                    <p>Com cinco álbuns de estúdio, a banda vendeu mais de 40 milhões de cópias worldwide e se tornou conhecida por suas performances energéticas ao vivo.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1587059328160-257f3151181e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ativismo" class="card-image">
+                <div class="card-content">
+                    <h3>Ativismo</h3>
+                    <p>Além da música, o System of a Down é conhecido por seu ativismo político, abordando questões como genocídio, injustiça social e liberdade.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="discography" id="discografia">
+            <h2>Discografia</h2>
+            <div class="albums">
+                <div class="album">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="System of a Down" class="album-cover">
+                    <div class="album-title">System of a Down <span class="album-year">(1998)</span></div>
+                </div>
+                
+                <div class="album">
+                    <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Toxicity" class="album-cover">
+                    <div class="album-title">Toxicity <span class="album-year">(2001)</span></div>
+                </div>
+                
+                <div class="album">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Steal This Album!" class="album-cover">
+                    <div class="album-title">Steal This Album! <span class="album-year">(2002)</span></div>
+                </div>
+                
+                <div class="album">
+                    <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mezmerize" class="album-cover">
+                    <div class="album-title">Mezmerize <span class="album-year">(2005)</span></div>
+                </div>
+                
+                <div class="album">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hypnotize" class="album-cover">
+                    <div class="album-title">Hypnotize <span class="album-year">(2005)</span></div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <div class="social-links">
+                <a href="#">📱</a>
+                <a href="#">💻</a>
+                <a href="#">📷</a>
+                <a href="#">🎵</a>
+            </div>
+            <p>© 2023 System of a Down | Site não oficial para fins educacionais</p>
+        </footer>
+    </div>
+
+    <script>
+        // Efeito de digitação no título
+        document.addEventListener('DOMContentLoaded', function() {
+            const logo = document.querySelector('.logo');
+            const originalText = logo.textContent;
+            logo.textContent = '';
+            
+            let i = 0;
+            const typeWriter = () => {
+                if (i < originalText.length) {
+                    logo.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            };
+            
+            typeWriter();
+            
+            // Efeito de rolagem suave
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Inicializar partículas
+            particlesJS("particles-js", {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#ff0022" },
+                    shape: {
+                        type: "circle",
+                        stroke: { width: 0, color: "#000000" },
+                        polygon: { nb_sides: 5 }
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: true,
+                        anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: { enable: true, speed: 2, size_min: 0.1, sync: false }
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#ffcc00",
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false,
+                        attract: { enable: false, rotateX: 600, rotateY: 1200 }
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "bubble" },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true
+                    },
+                    modes: {
+                        grab: { distance: 400, line_linked: { opacity: 1 } },
+                        bubble: { distance: 200, size: 6, duration: 2, opacity: 0.8, speed: 3 },
+                        repulse: { distance: 200, duration: 0.4 },
+                        push: { particles_nb: 4 },
+                        remove: { particles_nb: 2 }
+                    }
+                },
+                retina_detect: true
+            });
+        });
+        
+        // Funções de acessibilidade
+        function changeFontSize(size) {
+            document.body.classList.remove('font-small', 'font-large', 'font-xlarge');
+            
+            if (size === 'small') {
+                document.body.classList.add('font-small');
+            } else if (size === 'large') {
+                document.body.classList.add('font-large');
+            } else if (size === 'xlarge') {
+                document.body.classList.add('font-xlarge');
+            }
+            
+            // Fechar o painel após seleção (opcional)
+            document.querySelector('.accessibility-panel').style.display = 'none';
+        }
+        
+        // Manter o painel aberto quando o cursor está sobre ele
+        document.querySelector('.accessibility-panel').addEventListener('mouseleave', function() {
+            this.style.display = 'none';
+        });
+    </script>
+    
+    <!-- Biblioteca de partículas -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</body>
+</html>
